@@ -1,0 +1,34 @@
+# ProFTPD configuration file for Docker.
+
+Include /etc/proftpd/modules.d/*.conf
+Include /etc/proftpd/conf.d/*.conf
+
+DefaultRoot /home/data
+
+DefaultServer           on
+Group                   proftpd
+Port                    21
+ServerType              standalone
+User                    proftpd
+UseIPv6                 off
+WtmpLog                 off
+
+AllowOverwrite          {{ ALLOW_OVERWRITE }}
+#MasqueradeAddress       {{ PASV_ADDRESS }}
+MaxInstances            {{ MAX_INSTANCES }}
+PassivePorts            {{ PASV_MIN_PORT }} {{ PASV_MAX_PORT }}
+ServerName              "{{ SERVER_NAME }}"
+TimesGMT                {{ TIMES_GMT }}
+Umask                   {{ LOCAL_UMASK }}
+
+<Limit SITE_CHMOD>
+  DenyAll
+</Limit>
+
+<Limit WRITE>
+  {{ WRITE_ENABLE }}
+</Limit>
+
+<Limit READ>
+  {{ READ_ENABLE }}
+</Limit>
