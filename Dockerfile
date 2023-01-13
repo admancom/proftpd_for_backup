@@ -10,7 +10,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 
 ARG PROFTPD_VERSION=1.3.7f-r1
 ENV ALLOW_OVERWRITE=on \
-    FTPUSER_PASSWORD_SECRET=trollface \
+    FTPUSER_PASSWORD_SECRET=password \
     FTPUSER_NAME=ftpuser \
     FTPUSER_UID=1000 \
     LOCAL_UMASK=022 \
