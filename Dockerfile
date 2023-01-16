@@ -18,8 +18,10 @@ ENV FTPUSER_PASSWORD_SECRET=password \
     TZ=UTC
 
 COPY proftpd.conf.j2 /etc/proftpd/proftpd.conf
+COPY tls.conf.j2 /etc/proftpd/tls.conf
 RUN chmod 644 /etc/proftpd/proftpd.conf && \
-    apk add --update libcrypto1.1 proftpd=$PROFTPD_VERSION tzdata
+    chmod 644 /etc/proftpd/tls.conf && \
+    apk add --update proftpd-mod_tls openssl libcrypto1.1 proftpd=$PROFTPD_VERSION tzdata
 
 EXPOSE 21 $PASV_MIN_PORT-$PASV_MAX_PORT
 

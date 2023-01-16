@@ -20,6 +20,8 @@ printf "$FTPUSER_PASSWORD_SECRET\n$FTPUSER_PASSWORD_SECRET\n" | adduser --home /
 fi
 
 
+openssl req -x509 -days 1461 -nodes -newkey rsa:2048 -keyout /etc/ssl/private/proftpd.key -out /etc/ssl/certs/proftpd.crt -subj "/C=RU/ST=SPb/L=SPb/O=Global Security/OU=IT Department/CN=ftp.dmosk.local/CN=ftp"
+
 
 mkdir -p /run/proftpd && chown proftpd /run/proftpd/
 

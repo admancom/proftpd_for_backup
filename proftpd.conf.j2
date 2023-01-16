@@ -2,6 +2,9 @@
 
 Include /etc/proftpd/modules.d/*.conf
 Include /etc/proftpd/conf.d/*.conf
+Include /etc/proftpd/tls.conf
+
+LoadModule mod_tls.c
 
 DefaultRoot /home/data
 
