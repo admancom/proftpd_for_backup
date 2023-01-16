@@ -13,12 +13,12 @@ fi
 #fi
 
 #if [ -e /run/secrets/$FTPUSER_PASSWORD_SECRET ] && ! id -u "$FTPUSER_NAME"; then
-#  adduser -u $FTPUSER_UID -s /bin/sh -g "ftp user" -D $FTPUSER_NAME
-#  echo "$FTPUSER_NAME:$(cat /run/secrets/$FTPUSER_PASSWORD_SECRET)" \
-#    | chpasswd -e
 #fi
 
+if ! grep -q $FTPUSER_NAME /etc/passwd; then
 printf "$FTPUSER_PASSWORD_SECRET\n$FTPUSER_PASSWORD_SECRET\n" | adduser --home /home/data --shell /bin/sh --uid $FTPUSER_UID $FTPUSER_NAME
+fi
+
 
 
 mkdir -p /run/proftpd && chown proftpd /run/proftpd/
