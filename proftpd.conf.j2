@@ -13,22 +13,39 @@ User                    proftpd
 UseIPv6                 off
 WtmpLog                 off
 
-AllowOverwrite          {{ ALLOW_OVERWRITE }}
-#MasqueradeAddress       {{ PASV_ADDRESS }}
-MaxInstances            {{ MAX_INSTANCES }}
+AllowOverwrite          on
+MaxInstances            30
 PassivePorts            {{ PASV_MIN_PORT }} {{ PASV_MAX_PORT }}
 ServerName              "{{ SERVER_NAME }}"
-TimesGMT                {{ TIMES_GMT }}
-Umask                   {{ LOCAL_UMASK }}
+TimesGMT                off
+Umask                   022
 
+<Directory /home/data>
+
+#Разрешено добавлять, создавать директории,
+<Limit APPE MKD STOR STOU XMKD>
+  AllowAll
+</Limit>
+
+#запрещено менять права
 <Limit SITE_CHMOD>
   DenyAll
 </Limit>
 
-<Limit WRITE>
-  {{ WRITE_ENABLE }}
+#Запрещено удалять файлы, удалять дириктории, переименовывать,  
+<Limit DELE RMD RNTO XRMD>
+  DenyAll
 </Limit>
 
-<Limit READ>
-  {{ READ_ENABLE }}
+#Запрещено подниматься вверх(CDUP), изменение рабочего каталога(CWD), запрос времени модификации(MDTM)
+#печать рабочего каталога(PWD),   
+<Limit CDUP CWD LIST MDTM MLSD MLST NLST PWD RNFR STAT XCUP XCWD XPWD>
+  DenyAll
 </Limit>
+
+
+<Limit READ>
+  DenyAll
+</Limit>
+
+</Directory>

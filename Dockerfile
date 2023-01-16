@@ -9,26 +9,18 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
     org.label-schema.vcs-url=https://github.com/instantlinux/docker-tools
 
 ARG PROFTPD_VERSION=1.3.7f-r1
-ENV ALLOW_OVERWRITE=on \
-    FTPUSER_PASSWORD_SECRET=password \
+ENV FTPUSER_PASSWORD_SECRET=password \
     FTPUSER_NAME=ftpuser \
-    FTPUSER_UID=1000 \
-    LOCAL_UMASK=022 \
-    MAX_INSTANCES=30 \
+    FTPUSER_UID=1230 \
     PASV_MAX_PORT=30100 \
     PASV_MIN_PORT=30091 \
     SERVER_NAME=ProFTPD \
-    TIMES_GMT=off \
-    TZ=UTC \
-    WRITE_ENABLE=AllowAll \
-    READ_ENABLE=DenyAll
+    TZ=UTC
 
 COPY proftpd.conf.j2 /etc/proftpd/proftpd.conf
 RUN chmod 644 /etc/proftpd/proftpd.conf && \
     apk add --update libcrypto1.1 proftpd=$PROFTPD_VERSION tzdata
 
-RUN mkdir /home/data
-#VOLUME /etc/proftpd/conf.d /etc/proftpd/modules.d /var/lib/ftp
 EXPOSE 21 $PASV_MIN_PORT-$PASV_MAX_PORT
 
 COPY entrypoint.sh /usr/local/bin/
