@@ -16,11 +16,11 @@ fi
 #fi
 
 if ! grep -q $FTPUSER_NAME /etc/passwd; then
-printf "$FTPUSER_PASSWORD_SECRET\n$FTPUSER_PASSWORD_SECRET\n" | adduser --home /home/data --shell /bin/sh --uid $FTPUSER_UID $FTPUSER_NAME
+printf "$FTPUSER_PASSWORD_SECRET\n$FTPUSER_PASSWORD_SECRET\n" | adduser --home /home/ftp2 --shell /bin/sh --uid $FTPUSER_UID $FTPUSER_NAME
 fi
 
 
-openssl req -x509 -days 1461 -nodes -newkey rsa:2048 -keyout /etc/ssl/private/proftpd.key -out /etc/ssl/certs/proftpd.crt -subj "/C=RU/ST=SPb/L=SPb/O=Global Security/OU=IT Department/CN=ftp.dmosk.local/CN=ftp"
+openssl req -x509 -days 1461 -nodes -newkey rsa:2048 -keyout /etc/ssl/private/proftpd.key -out /etc/ssl/certs/proftpd.crt -subj "/C=RU/ST=SPb/L=SPb/O=Global Security/OU=IT Department/CN=ftp2.backup.adman.com/CN=ftp"
 
 
 mkdir -p /run/proftpd && chown proftpd /run/proftpd/

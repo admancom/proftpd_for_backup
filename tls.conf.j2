@@ -1,7 +1,7 @@
 <IfModule mod_tls.c>
 TLSEngine                       on
 TLSLog                          /var/log/proftpd/tls.log
-TLSProtocol                     SSLv23 TLSv1.2
+TLSProtocol                     SSLv23 TLSv1.2 TLSv1.3
 TLSRSACertificateFile           /etc/ssl/certs/proftpd.crt
 TLSRSACertificateKeyFile        /etc/ssl/private/proftpd.key
 TLSOptions                      NoCertRequest EnableDiags NoSessionReuseRequired

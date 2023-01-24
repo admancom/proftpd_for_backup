@@ -6,7 +6,7 @@ Include /etc/proftpd/tls.conf
 
 LoadModule mod_tls.c
 
-DefaultRoot /home/data
+DefaultRoot /home/ftp2
 
 DefaultServer           on
 Group                   proftpd
@@ -23,10 +23,10 @@ ServerName              "{{ SERVER_NAME }}"
 TimesGMT                off
 Umask                   022
 
-<Directory /home/data>
+<Directory /home/ftp2>
 
 #Разрешено добавлять, создавать директории,
-<Limit APPE MKD STOR STOU XMKD>
+<Limit APPE MKD STOR STOU XMKD CWD>
   AllowAll
 </Limit>
 
@@ -42,10 +42,13 @@ Umask                   022
 
 #Запрещено подниматься вверх(CDUP), изменение рабочего каталога(CWD), запрос времени модификации(MDTM)
 #печать рабочего каталога(PWD),   
-<Limit CDUP CWD LIST MDTM MLSD MLST NLST PWD RNFR STAT XCUP XCWD XPWD>
+<Limit CDUP LIST MDTM MLSD MLST NLST RNFR STAT XCUP XCWD XPWD>
   DenyAll
 </Limit>
 
+<Limit PWD>
+  AllowAll
+</Limit>
 
 <Limit READ>
   DenyAll
