@@ -18,6 +18,7 @@ WtmpLog                 off
 
 AllowOverwrite          on
 MaxInstances            30
+MasqueradeAddress       {{ PASV_ADDRESS }}
 PassivePorts            {{ PASV_MIN_PORT }} {{ PASV_MAX_PORT }}
 ServerName              "{{ SERVER_NAME }}"
 TimesGMT                off
