@@ -5,6 +5,9 @@
 Нужно указать свой пароль в
 FTPUSER_PASSWORD_SECRET=password
 
+Нужно указать свой пароль в
+PASV_ADDRESS=my_ip
+
 Юзер указан в 
 FTPUSER_NAME=ftpuser
 
